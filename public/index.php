@@ -265,7 +265,7 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 slide-in">
-                <a href="<?= BASE_URL?>/user/login.php" class="btn-primary px-8 py-3 rounded-lg text-lg inline-block text-center">
+                <a onclick="window.location.href='<?= BASE_URL?>/public/agendamento.php' " class="btn-primary px-8 py-3 rounded-lg text-lg inline-block text-center">
                     Reservar Horário
                 </a>
                 <a href="#services" class="btn-outline px-8 py-3 rounded-lg text-lg text-center">
