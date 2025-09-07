@@ -1,0 +1,75 @@
+@media (max-width: 600px) {
+  /* Containers de serviços */
+  .servicos-1, .servicos-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os serviços */
+  }
+
+  .seleciona-servicos h3 {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .button-confirma {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Títulos e textos */
+  .main-container h1.seleciona-span {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .h1-titulos {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* Tabela responsiva */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* separador entre linhas */
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  td.right {
+    justify-content: flex-start;
+    margin-top: 5px;
+  }
+
+  .icone-left {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+
+  .confirma-corte {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
+  }
+
+  /* Espaçamento interno dos formulários ou inputs */
+  input, select, textarea {
+    width: 100%;
+    max-width: 250px;
+  }
+}
