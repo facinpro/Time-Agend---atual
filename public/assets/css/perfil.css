@@ -1,6 +1,6 @@
 nav a:hover, .selected {
     color: white;
-    background-color: #b0c43a;
+    background-color: #D4AF37;
     border-radius: 20px;
     padding: 5px 15px;
 }
@@ -129,7 +129,7 @@ input:focus {
     position: relative;
     left: 1000px;
     top: -70px;
-    background-color: #b0c43a;
+    background-color: #D4AF37;
     padding: 10px 20px;
     border-radius: 20px;
     color: white;
@@ -235,7 +235,7 @@ input:focus {
   }
 
   .edit-icon {
-    background-color: #b0c43a;
+    background-color: #D4AF37;
     border-radius: 20px;
     padding: 5px;
     position: relative;

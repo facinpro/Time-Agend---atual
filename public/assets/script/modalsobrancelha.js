@@ -1,4 +1,3 @@
-
 function selecionarHorario(horario) {
     // Remove a seleção de todos os botões primeiro
     document.querySelectorAll('.horarios-grid button').forEach(btn => {
@@ -41,14 +40,39 @@ function openContactModal() {
 }
 
 function confirmaAgendamento() {
-    // Fecha o modal de resumo
-    fecharModalCortes();
+    // // Fecha o modal de resumo
+    // fecharModalCortes();
 
-    // Abre o modal de sucesso
-    document.getElementById("sucessoModalCortes").style.display = "block";
+    // // Abre o modal de sucesso
+    // document.getElementById("sucessoModalCortes").style.display = "block";
     
-    confirmaSombrancelhaBackend(openContactModal);
-    
+    const data = document.getElementById("dataSobrancelha").value.trim();
+
+    const dados = {
+        tipoServico: sobrancelhaSelecionada,
+        profissional: profissionalSelecionadoSobrancelha,
+        data: data,
+        horario: horarioSelecionadoSobrancelha,
+        valor: valorSobrancelhaSelecionada
+    };
+
+    fetch("assets/script/salvar_agendamento.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.text())
+    .then(resultado => {
+        console.log("Resposta do servidor:", resultado);
+        fecharModal(); // ✅ agora está certo
+        document.getElementById("sucessoModalCortes").style.display = "block";
+    })
+    .catch(error => {
+        console.error("Erro ao salvar agendamento:", error);
+        alert("Ocorreu um erro ao salvar o agendamento.");
+    });
 }
 
 // Função para fechar o modal de contato
@@ -62,37 +86,4 @@ function fecharModal() {
 //     fecharModal(); // Fecha o modal após o pagamento
 // }
 
-// ------------------------------------------------------------------------------------
-function confirmaSombrancelhaBackend(callback) {
-    const data = document.getElementById("dataSobrancelha").value.trim();
-
-    // Dados que você quer enviar
-    const dados = {
-        data: data,
-        horario: horarioSelecionadoSobrancelha,
-        profissional: profissionalSelecionadoSobrancelha,
-        servico: sobrancelhaSelecionada,
-        valor: valorSobrancelhaSelecionada
-    };
-
-    // Envia os dados para o backend
-    fetch("salvar_agendamento.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            callback(); // Chama a função de callback se o agendamento for bem-sucedido
-        } else {
-            alert("Erro ao agendar: " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Erro:", error);
-        alert("Ocorreu um erro ao tentar agendar.");
-    });
-}
+// ----------------------------------------------------------------------------------

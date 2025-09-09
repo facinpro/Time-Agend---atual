@@ -1,100 +1,37 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+file_put_contents("log_debug.txt", file_get_contents("php://input"));
 
-session_start();
-header('Content-Type: application/json; charset=utf-8');
+// Conexão com o banco
+$host = "localhost";
+$dbname = "barbearia";
+$user = "root";
+$senha = "123456";
 
-require_once "../../../config/conection.php"; 
-include_once "../../../models/auth/authFunctions.php";
+$conn = new mysqli($host, $user, $senha, $dbname);
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["status" => "error", "mensagem" => "Usuário não autenticado"]);
-    exit;
+// Verifica conexão
+if ($conn->connect_error) {
+    die("Erro de conexão: " . $conn->connect_error);
 }
 
-$id_user = $_SESSION['user_id'];
+// Recebe dados do JavaScript (JSON)
+$dados = json_decode(file_get_contents("php://input"), true);
 
-$input = file_get_contents("php://input");
-$dados = json_decode($input, true);
+$tipoServico = $conn->real_escape_string($dados['tipoServico']);
+$profissional = $conn->real_escape_string($dados['profissional']);
+$data = $conn->real_escape_string($dados['data']);
+$horario = $conn->real_escape_string($dados['horario']);
+$valor = $conn->real_escape_string($dados['valor']);
 
-$nomeServico = $dados['tipoServico'] ?? null;
-$nomeBarbeiro = $dados['profissional'] ?? null;
-$data = $dados['data'] ?? null;       
-$horario = $dados['horario'] ?? null; 
+// Insere no banco
+$sql = "INSERT INTO agendamentos (tipo_servico, profissional, data, horario, valor)
+        VALUES ('$tipoServico', '$profissional', '$data', '$horario', '$valor')";
 
-if (!$nomeServico || !$nomeBarbeiro || !$data || !$horario) {
-    echo json_encode(["status" => "error", "mensagem" => "Campos obrigatórios não preenchidos"]);
-    exit;
-}
-
-if (!strtotime($data)) {
-    echo json_encode(["status" => "error", "mensagem" => "Data inválida"]);
-    exit;
-}
-
-if (!preg_match('/^\d{2}:\d{2}$/', $horario)) {
-    echo json_encode(["status" => "error", "mensagem" => "Horário inválido. Formato esperado HH:MM"]);
-    exit;
-}
-
-function nomebarbeiro($nome){
-    global $con;
-    $stmt = $con->prepare("SELECT idbarbeiro FROM barbeiro WHERE nome_barbeiro = ?");
-    $stmt->bind_param("s", $nome);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $barbeiro = $result->fetch_assoc();
-    return $barbeiro['idbarbeiro'] ?? null;
-}   
-
-function nomeservico($nome){
-    global $con;
-    $stmt = $con->prepare("SELECT idservico FROM servico WHERE nome_servico = ?");
-    $stmt->bind_param("s", $nome);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $servico = $result->fetch_assoc();
-    return $servico['idservico'] ?? null;
-}
-
-$id_barbeiro = nomebarbeiro($nomeBarbeiro);
-$id_servico = nomeservico($nomeServico);
-
-if (!$id_barbeiro || !$id_servico) {
-    echo json_encode(["status" => "error", "mensagem" => "Serviço ou barbeiro não encontrados"]);
-    exit;
-}
-
-$dataFormatada = date('Y-m-d 00:00:00', strtotime($data));
-$horarioFormatado = date('Y-m-d H:i:s', strtotime($data . ' ' . $horario));
-
-$status = 'pendente';
-$criado_em = date('Y-m-d H:i:s');
-
-$stmt = $con->prepare("
-    INSERT INTO agendamento (iduser, idbarbeiro, idservico, data, horario, status, plano_ativo, criado_em)
-    VALUES (?, ?, ?, ?, ?, ?, NULL, ?)
-");
-
-$stmt->bind_param(
-    "iiissss",
-    $id_user,
-    $id_barbeiro,
-    $id_servico,
-    $dataFormatada,
-    $horarioFormatado,
-    $status,
-    $criado_em
-);
-
-if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "mensagem" => "Agendamento salvo com sucesso!"]);
+if ($conn->query($sql) === TRUE) {
+    echo "Agendamento salvo com sucesso!";
 } else {
-    echo json_encode(["status" => "error", "mensagem" => "Erro ao salvar agendamento: " . $stmt->error]);
+    echo "Erro: " . $conn->error;
 }
 
-$stmt->close();
-$con->close();
+$conn->close();
 ?>

@@ -52,8 +52,34 @@ function confirmaAgendamentoCombo() {
 
     // Abre o modal de sucesso
     document.getElementById("sucessoModalCombo").style.display = "block";
-    confirmaComboBackend(opencombo);
 
+    const data = document.getElementById("dataCombo").value.trim();
+
+    const dados = {
+        tipoServico: comboSelecionado,
+        profissional: profissionalSelecionado,
+        data: data,
+        horario: horarioSelecionadoCombo,
+        valor: valorComboSelecionada
+    };
+
+    fetch("assets/script/salvar_agendamento.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.text())
+    .then(resultado => {
+        console.log("Resposta do servidor:", resultado);
+        fecharModalCombo(); // ✅ agora está certo
+        document.getElementById("sucessoModalCombo").style.display = "block";
+    })
+    .catch(error => {
+        console.error("Erro ao salvar agendamento:", error);
+        alert("Ocorreu um erro ao salvar o agendamento.");
+    });
 }
 
 // Fechar modal
@@ -66,31 +92,4 @@ function fecharModalCombo() {
 //     document.getElementById("sucessoModalCombo").style.display = "none";
 // }
 
-function confirmaComboBackend(callback) {
-    const data = document.getElementById("dataCombo").value.trim();
 
-    // Dados que você quer enviar
-    const dados = {
-        data: data,
-        horario: horarioSelecionadoCombo,
-        profissional: profissionalSelecionado,
-        servico: comboSelecionado,
-        valor: valorComboSelecionada
-    };
-
-    // Enviar os dados para o backend
-    fetch("salvar_agendamento.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Agendamento confirmado:", data);
-    })
-    .catch(error => {
-        console.error("Erro ao confirmar agendamento:", error);
-    });
-}

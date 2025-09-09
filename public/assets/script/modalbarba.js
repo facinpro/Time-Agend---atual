@@ -1,5 +1,3 @@
-
-
 let horarioSelecionadoBarba = ''; // Declare the variable at the appropriate scope
 
 function selecionarHorarioBarba(horario) {
@@ -31,8 +29,6 @@ function openContactModal3() {
         alert("Preencha todos os campos e selecione um horário.");
         return;
     }
-    
-
 
     // Preencher dados no modal
     
@@ -51,7 +47,6 @@ function openContactModal3() {
 function confirmaAgendamentoBarba() {
     fecharModalBarba();
     document.getElementById("sucessoModalBarba").style.display = "block";
-    confirmaBarbaBackend(openContactModal3);
 }
 // Fechar modal
 function fecharModalBarba() {
@@ -63,9 +58,10 @@ function fecharModalSucessoBarba() {
     document.getElementById("sucessoModalBarba").style.display = "none";
 }
 
-function confirmaBarbaBackend(callback) {
+function confirmaAgendamentoBarba() {
     const data = document.getElementById("dataBarba").value.trim();
 
+    // Dados que você quer enviar
     const dados = {
         tipoServico: tipoBarbaSelecionado,
         profissional: profissionalSelecionadoBarba,
@@ -74,25 +70,24 @@ function confirmaBarbaBackend(callback) {
         valor: valorBarbaSelecionada
     };
 
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(dados)
     })
-    .then(response => response.json()) // agora espera JSON do PHP
+    .then(response => response.text())
     .then(resultado => {
         console.log("Resposta do servidor:", resultado);
-        if(resultado.status === "success") {
-            fecharModalBarba();
-            document.getElementById("sucessoModalBarba").style.display = "block";
-        } else {
-            alert(resultado.mensagem);
-        }
+        fecharModalBarba();
+        document.getElementById("sucessoModalBarba").style.display = "block";
     })
     .catch(error => {
         console.error("Erro ao salvar agendamento:", error);
         alert("Ocorreu um erro ao salvar o agendamento.");
     });
 }
+
+
+

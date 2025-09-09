@@ -44,48 +44,42 @@ function openCortes() {
 
 // Confirmar agendamento
 function confirmaAgendamentoCortes() {
+    // // Fecha o modal de resumo
+    // fecharModalCortes();
 
-    // Fecha o modal de resumo
-    fecharModalCortes();
-
-    // Abre o modal de sucesso
-    document.getElementById("sucessoModalCortes").style.display = "block";
+    // // Abre o modal de sucesso
+    // document.getElementById("sucessoModalCortes").style.display = "block";
     
-    confirmaCortesBackend(openCortes);
-}
-
-// Fechar modal
-function fecharModalCortes() {
-    document.getElementById("modalResumoCortes").style.display = "none";
-}
-
-function confirmaAgendamentoCortes(callback) {
     const data = document.getElementById("dataCortes").value.trim();
 
-    // Dados que você quer enviar
     const dados = {
+        tipoServico: corteSelecionadoCortes,
+        profissional: profissionalSelecionadoCortes,
         data: data,
         horario: horarioSelecionadoCortes,
-        profissional: profissionalSelecionadoCortes,
-        servico: corteSelecionadoCortes,
         valor: valorCortesSelecionada
     };
 
-    // Enviar os dados para o backend
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(dados)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            confirmaAgendamentoCortes();
-        } else {
-            alert("Erro ao agendar. Tente novamente.");
-        }
+    .then(response => response.text())
+    .then(resultado => {
+        console.log("Resposta do servidor:", resultado);
+        fecharModalCortes(); // ✅ agora está certo
+        document.getElementById("sucessoModalCortes").style.display = "block";
     })
-    .catch(error => console.error("Erro:", error));
+    .catch(error => {
+        console.error("Erro ao salvar agendamento:", error);
+        alert("Ocorreu um erro ao salvar o agendamento.");
+    });
+}
+
+// Fechar modal
+function fecharModalCortes() {
+    document.getElementById("modalResumoCortes").style.display = "none";
 }

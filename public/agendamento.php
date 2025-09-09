@@ -41,12 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento1.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento2.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/profissionais.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/resumo.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/contact.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo-modais.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/resumo.css">
+    
     <style>
-        
+       
     </style>
     
 </head>
@@ -279,18 +280,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 </form> -->
 
 <script>
-function confirmaAgendamentoCortes() {
-  document.getElementById("inputServicoCortes").value =
-      document.getElementById("resumoServicoCortes").innerText.replace("Serviço: ", "");
-  document.getElementById("inputProfissionalCortes").value =
-      document.getElementById("resumoProfissionalCortes").innerText.replace("Profissional: ", "");
-  document.getElementById("inputDataCortes").value =
-      document.getElementById("resumoDataCortes").innerText.replace("Data: ", "");
-  document.getElementById("inputHorarioCortes").value =
-      document.getElementById("resumoHorarioCortes").innerText.replace("Horário: ", "");
-  document.getElementById("inputValorCortes").value =
-      document.getElementById("resumoValorCortes").innerText.replace("Valor: ", "");
-}
+// function confirmaAgendamentoCortes() {
+//   document.getElementById("inputServicoCortes").value =
+//       document.getElementById("resumoServicoCortes").innerText.replace("Serviço: ", "");
+//   document.getElementById("inputProfissionalCortes").value =
+//       document.getElementById("resumoProfissionalCortes").innerText.replace("Profissional: ", "");
+//   document.getElementById("inputDataCortes").value =
+//       document.getElementById("resumoDataCortes").innerText.replace("Data: ", "");
+//   document.getElementById("inputHorarioCortes").value =
+//       document.getElementById("resumoHorarioCortes").innerText.replace("Horário: ", "");
+//   document.getElementById("inputValorCortes").value =
+//       document.getElementById("resumoValorCortes").innerText.replace("Valor: ", "");
+// }
 </script>
 
 
@@ -706,20 +707,20 @@ function confirmaAgendamentoCortes() {
     <div style="margin: 50px ;margin-left: 270px; width: 92%; transform: translateX(-15%); height: 2px; background: linear-gradient( rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
 
     <script>
-        // Função para abrir o modal de contato
-        function openContactModal() {
-            document.getElementById("resumoModal").style.display = "block";
-        }
+        // // Função para abrir o modal de contato
+        // function openContactModal() {
+        //     document.getElementById("resumoModal").style.display = "block";
+        // }
 
-        // Função para fechar o modal de contato
-        function fecharModal() {
-            document.getElementById("resumoModal").style.display = "none";
-        }
-        // Função para pagar com Pix            
-        function pagarPix() {
-            alert("Pagamento realizado com sucesso!");
-            fecharModal(); // Fecha o modal após o pagamento
-        }
+        // // Função para fechar o modal de contato
+        // function fecharModal() {
+        //     document.getElementById("resumoModal").style.display = "none";
+        // }
+        // // Função para pagar com Pix            
+        // function pagarPix() {
+        //     alert("Pagamento realizado com sucesso!");
+        //     fecharModal(); // Fecha o modal após o pagamento
+        // }
     </script>
 
 
@@ -731,6 +732,7 @@ function confirmaAgendamentoCortes() {
     <script src="<?= BASE_URL?>public/assets/script/modalbarba.js"></script>
     <script src="<?= BASE_URL?>public/assets/script/modalsobrancelha.js"></script>  
     <script src="<?= BASE_URL?>public/assets/script/contact.js"></script>
+    <script src="<?= BASE_URL?>public/assets/script/modalsobrancelha.js"></script> 
      <script src="<?= BASE_URL ?>public/assets/script/menu.js" defer></script>
 
 </body>

@@ -28,10 +28,10 @@
     cursor: pointer;
 }
 /* Menu */
-.menu-principal {
+/* .menu-principal {
     
     flex-direction: column; /* Organiza itens em coluna no modo responsivo */
-}
+/* } */ 
 
 .menu-principal.active {
     display: flex; /* Exibe o menu quando 'active' está presente */
