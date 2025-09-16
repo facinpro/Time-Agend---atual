@@ -16,11 +16,16 @@ header {
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.515);
     margin-top: 12px;
     width: 87%;
-    position: relative;
+    margin-left: 50px;
     left: 49px;
 }
 header img {
     width: 200px;
+    margin-left: 8%;
+}
+.img-logo{
+    position: relative;
+    right: 50px;
 }
 nav a {
     color: #fff;
@@ -93,6 +98,7 @@ h2 {
     cursor: pointer;
 }
 
+
 /* Menu no desktop */
 .menu-principal {
     display: flex; /* Sempre visível no desktop */
@@ -102,6 +108,14 @@ h2 {
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
+    header{
+       padding: 15px 60px;
+        left: 0px;
+        margin-left: 16px;
+        width: 62%;
+        box-shadow: none;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    }
     .menu-principal {
         display: none; /* Escondido no mobile */
         flex-direction: column;
@@ -157,16 +171,7 @@ h2 {
         transition: 0.5s;
     }
 
-    header {
-        padding: 15px 80px;
-        background-color: #000;
-        border-bottom: none;
-        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.515);
-        margin-top: 12px;
-        width: 87%;
-        position: relative;
-        left: 0px;
-    }
+    
 }
 
 /* Estilos gerais do modal */

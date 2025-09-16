@@ -1,1 +1,1 @@
-{"tipoServico":"Sobrancelha Pinça","profissional":"Rafael","data":"2025-09-11","horario":"11:00","valor":25}
+{"tipoServico":"Corte Degradê","profissional":"Carlos","data":"2025-09-17","horario":"10:00","valor":30}

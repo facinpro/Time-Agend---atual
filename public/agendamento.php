@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento1.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento2.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/profissionais.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo2.css"> 
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/contact.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo-modais.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/resumo.css">
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <body>
     <!-- Header -->
     <header>
-    <img src="<?= BASE_URL?>/img/SAVE_20241028_185834.jpg" alt="Logo TimeAgend">
+    <img class="img-logo" src="<?= BASE_URL?>/img/SAVE_20241028_185834.jpg" alt="Logo TimeAgend">
         <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button> <!-- Botão para alternar o menu -->
         <nav class="menu-principal">
             <a href="<?= BASE_URL ?>/public/index.php">Início</a>
@@ -63,8 +63,50 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
             <a href="<?= BASE_URL ?>/public/perfil.php">Perfil</a> <!-- Classe "selected" aplicada ao Perfil -->
             <a href="#" onclick="openContact()">Contato</a>
         </nav>
+         <style>
+           .linha-servico-titulo {
+    margin: 10px auto;
+    width: 140%;
+    transform: translateX(-15%);
+    height: 2px;
+    background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));
+}
+.linha-servico-titulo-profissional{
+  margin: 20px auto;
+    width: 94%;
+    transform: translateX(-15%);
+    height: 2px;
+    background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));
+    margin-left: 248px;
+}
+.linha-servico-titulo-data-hora{
+margin: 10px auto;
+    width: 280%;
+    transform: translateX(-15%);
+    height: 2px;
+    background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));
+    margin-left: -248px;
+}
 
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .linha-servico-titulo {
+        margin-left: 12%;
+        width: 110%;
         
+    }
+    .linha-servico-titulo-profissional{
+      margin-left: 12%;
+        width: 110%;
+        
+    }
+    .linha-servico-titulo-data-hora{
+      margin-left: 12%;
+        width: 110%;
+}}
+
+        </style>
     </header>
     <div class="modal" id="contactModal">
     <div class="modal-content-1">
@@ -110,10 +152,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
     <!-- Main Content -->
     <div class="main-container" id="main-container-servico">
         <h1><span class="span">SELECIONE UM</span> SERVIÇO</h1>
-        <div style="margin: 10px auto; width: 140%; transform: translateX(-15%); height: 2px; background: linear-gradient( rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+        <div class="linha-servico-titulo" ></div>
          </div>
 
-        
+       
       <div class="seleciona-servicos" id="tituloServico">
         <div class="servicos-1">
             <h3 id="servico1" onclick="selecionarServico('Cortes')">Cortes</h3>
@@ -138,11 +180,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <div class="menu-container" id="Cortes-menu">
     <div class="main-container">
         <h1 class="seleciona-span"><span class="span">SELECIONE UM</span> CORTE</h1>
-        <div style="position: relative; top: -12px; margin: 10px auto; width: 140%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+        <div class="linha-servico-titulo"></div>
     </div>
     <img class="icone-left" src="<?= BASE_URL?>/img/left-arrow.png"  alt="Voltar" title="voltar" onclick="voltarParaSelecao()">
     <div class="estiliza-cortes">
-        <h1 class="h1-titulos">CORTES</h1>
+        <h1 class="h1-titulos" class="h1-cortes">CORTES</h1>
         <table>
             <tr id="corte1" onclick="selecionarTipoCorte('Corte Clássico', 40)">
                 <td class="left"> <input type="checkbox" id="checkboxCorte1">CORTE CLÁSSICO</td>
@@ -173,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <!-- Seção: Seleção de Profissionais -->
 <div class="seleciona-profissionais" id="profissional-menu" style="display: none;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA SEU</span> PROFISSIONAL</h1>
-    <div style="overflow: hidden; position: relative; left: 200px; top: -12px; margin: 10px auto; width: 94%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-profissional"></div>
 
     <img class="icone-left" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaSelecaoCortes()">
 
@@ -203,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <!-- Seção: Seleção de Data e Hora -->
 <div class="seleciona-data" id="selecionaData-cortes" style="display: none; text-align: center;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA UMA</span> DATA E HORA</h1>
-    <div style="overflow: hidden; position: relative; right: 250px; top: -12px; margin: 10px auto; width: 280%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-data-hora"></div>
 
     <img class="icone-left1" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaProfissionaisCortes()">
 
@@ -338,7 +380,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <!-- Profissionais da categoria Combo -->
 <div class="seleciona-profissionais" id="profissional-menu-combo" style="display: none;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA SEU</span> PROFISSIONAL</h1>
-    <div style="overflow: hidden ;position: relative; left: 200px;top: -12px; margin: 10px auto; width: 94%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-profissional"></div>
     <img class="icone-left" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaSelecaoCombo()">
     
     
@@ -372,7 +414,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
    <!-- Seção de Seleção de Data e Horário - COMBO -->
 <div class="seleciona-data" id="selecionaData" style="display: none; text-align: center;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA UMA</span> DATA E HORA</h1>
-    <div style="overflow: hidden ;position: relative; right: 250px;top: -12px; margin: 10px auto; width: 280%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-data-hora"></div>
     <img class="icone-left1" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaProfissionais()">
     
    <!-- ======= INÍCIO DO FORMULÁRIO ADICIONADO ======= -->
@@ -464,7 +506,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <!-- Profissionais da categoria Barba -->
 <div class="seleciona-profissionais" id="profissional-menu-barba" style="display: none;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA SEU</span> PROFISSIONAL</h1>
-    <div style="overflow: hidden ;position: relative; left: 200px;top: -12px; margin: 10px auto; width: 94%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-profissional"></div>
     <img class="icone-left" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaSelecaoBarba()">
     
     
@@ -498,7 +540,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
    <!-- Seção de Seleção de Data e Horário - Barba -->
 <div class="seleciona-data" id="selecionadata-barba" style="display: none; text-align: center;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA UMA</span> DATA E HORA</h1>
-    <div style="overflow: hidden ;position: relative; right: 250px;top: -12px; margin: 10px auto; width: 280%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-data-hora"></div>
     <img class="icone-left1" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaBarba()">
     
     <!-- ======= INÍCIO DO FORMULÁRIO ADICIONADO ======= -->
@@ -591,7 +633,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
 <!-- Profissionais da categoria Sobrancelha -->
 <div class="seleciona-profissionais" id="profissional-menu-sobrancelha" style="display: none;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA SEU</span> PROFISSIONAL</h1>
-    <div style="overflow: hidden ;position: relative; left: 200px;top: -12px; margin: 10px auto; width: 94%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-profissional"></div>
     <img class="icone-left" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaSelecaoSobrancelha()">
     
     
@@ -625,7 +667,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
    <!-- Seção de Seleção de Data e Horário - Sobrancelha -->
 <div class="seleciona-data" id="selecionadata-sobrancelha" style="display: none; text-align: center;">
     <h1 class="seleciona-span"><span class="span">ESCOLHA UMA</span> DATA E HORA</h1>
-    <div style="overflow: hidden ;position: relative; right: 250px;top: -12px; margin: 10px auto; width: 280%; transform: translateX(-15%); height: 2px; background: linear-gradient(rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
+    <div class="linha-servico-titulo-data-hora"></div>
     <img class="icone-left1" src="<?= BASE_URL?>/img/left-arrow.png" alt="Voltar" title="voltar" onclick="voltarParaProfissionaisSobrancelha()">
     
     <!-- ======= INÍCIO DO FORMULÁRIO ADICIONADO ======= -->
@@ -704,8 +746,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
     <!-- Conteúdo da página -->
 
 
-    <div style="margin: 50px ;margin-left: 270px; width: 92%; transform: translateX(-15%); height: 2px; background: linear-gradient( rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));"></div>
-
+    <div class="linha-servico" ></div>
+     <style>
+       .linha-servico{  margin: 50px ;
+        margin-left: 18%; 
+        width: 92%; transform: translateX(-15%); height: 2px; background: linear-gradient( rgba(255, 255, 255, 0.414), rgba(255, 255, 255, 0));}
+     </style>
     <script>
         // // Função para abrir o modal de contato
         // function openContactModal() {

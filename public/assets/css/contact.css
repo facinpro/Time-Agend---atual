@@ -71,7 +71,7 @@
 .menu-toggle {
     display: block; /* Exibe o botão de menu em telas menores */
     color: #fff;
-    overflow: hidden;
+   
 }
 
 .menu-principal {
@@ -98,7 +98,7 @@ margin-bottom: 20px;
 transition: 0.5s;
 }
 
-header {
+/* header {
    
     padding: 15px 80px;
     background-color: #000;
@@ -106,7 +106,7 @@ header {
     width: 87%;
     position: relative;
     left: 0px;
-}
+} */
 
 }
 
