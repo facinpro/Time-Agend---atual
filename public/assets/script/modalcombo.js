@@ -71,15 +71,15 @@ function confirmaComboBackend(callback) {
 
     // Dados que você quer enviar
     const dados = {
+        tipoServico: comboSelecionado,   // ✅ corrigido
+        profissional: profissionalSelecionado,
         data: data,
         horario: horarioSelecionadoCombo,
-        profissional: profissionalSelecionado,
-        servico: comboSelecionado,
         valor: valorComboSelecionada
     };
 
     // Enviar os dados para o backend
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -87,10 +87,17 @@ function confirmaComboBackend(callback) {
         body: JSON.stringify(dados)
     })
     .then(response => response.json())
-    .then(data => {
-        console.log("Agendamento confirmado:", data);
+    .then(resultado => {
+        console.log("Resposta do servidor:", resultado);
+        if (resultado.status === "success") {
+            fecharModalCombo();
+            document.getElementById("sucessoModalCombo").style.display = "block";
+        } else {
+            alert(resultado.mensagem);
+        }
     })
     .catch(error => {
         console.error("Erro ao confirmar agendamento:", error);
+        alert("Ocorreu um erro ao salvar o agendamento.");
     });
 }

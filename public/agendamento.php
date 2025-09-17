@@ -642,14 +642,14 @@ function confirmaAgendamentoCortes() {
             <!-- Horários -->
             <p class="titulo-seleciona-um-horario">Selecione um horário</p>
             <div class="horarios-grid">
-                        <button type="button" onclick="selecionarHorario('09:00')">09:00</button>
-                        <button type="button" onclick="selecionarHorario('10:00')">10:00</button>
-                        <button type="button" onclick="selecionarHorario('11:00')">11:00</button>
-                        <button type="button" onclick="selecionarHorario('12:00')">12:00</button>
-                        <button type="button" onclick="selecionarHorario('13:00')">13:00</button>
-                        <button type="button" onclick="selecionarHorario('14:00')">14:00</button>
-                        <button type="button" onclick="selecionarHorario('15:00')">15:00</button>
-                        <button type="button" onclick="selecionarHorario('16:00')">16:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('09:00')">09:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('10:00')">10:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('11:00')">11:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('12:00')">12:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('13:00')">13:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('14:00')">14:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('15:00')">15:00</button>
+                        <button type="button" onclick="selecionarHorarioSobrancelha('16:00')">16:00</button>
                     </div>
 
             <!-- Botão para confirmar a seleção do horário -->

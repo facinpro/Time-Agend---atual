@@ -1,98 +1,101 @@
+// Variáveis globais corrigidas
+if (typeof horarioSelecionadoSobrancelha === 'undefined') {
+    var horarioSelecionadoSobrancelha = '';
+    var sobrancelhaSelecionada = ''; // Nome do serviço
+    var profissionalSelecionadoSobrancelha = '';
+    var valorSobrancelhaSelecionada = '';
+}
 
-function selecionarHorario(horario) {
-    // Remove a seleção de todos os botões primeiro
-    document.querySelectorAll('.horarios-grid button').forEach(btn => {
-        btn.classList.remove('selecionado'); // Remove a classe de selecionado
+// Selecionar horário
+function selecionarHorarioSobrancelha(horario) {
+    document.querySelectorAll('#horariosSobrancelha button').forEach(btn => {
+        btn.classList.remove('selecionado');
     });
 
-    // Marca o botão clicado como selecionado
-    const botoes = document.querySelectorAll('.horarios-grid button');
-    botoes.forEach(botao => {
-        if (botao.innerText.trim() === horario) { // Usar trim() para remover possíveis espaços extras
-            botao.classList.add('selecionado'); // Adiciona a classe de selecionado
+    document.querySelectorAll('#horariosSobrancelha button').forEach(botao => {
+        if (botao.innerText.trim() === horario) {
+            botao.classList.add('selecionado');
         }
     });
 
-    // Guarda o horário selecionado
     horarioSelecionadoSobrancelha = horario;
 }
 
-// Função para abrir o modal de contato
-function openContactModal() {
-    
+// Abrir modal de resumo
+function abrirResumoSobrancelha() {
     const dataInput = document.getElementById('dataSobrancelha').value.trim();
-    
 
-    if (dataInput === '' || horarioSelecionadoSobrancelha === '') {
-        alert('Por favor, preencha todos os campos e selecione um horário antes de confirmar.');
-        return; // Impede de abrir o modal se faltar algo
+    if (!dataInput || !horarioSelecionadoSobrancelha) {
+        alert('Por favor, preencha todos os campos e selecione um horário.');
+        return;
     }
 
-    // Atualiza o conteúdo do modal com os dados preenchidos
-   
-    document.getElementById('resumoServico').innerHTML = `<strong>Serviço:</strong> ${sobrancelhaSelecionada}`;
-    document.getElementById('resumoProfissional').innerHTML = `<strong>Profissional:</strong> ${profissionalSelecionadoSobrancelha}`;
-    document.getElementById('resumoData').innerHTML = `<strong>Data:</strong> ${dataInput}`;
-    document.getElementById('resumoHorario').innerHTML = `<strong>Horário:</strong> ${horarioSelecionadoSobrancelha}`;
-    document.getElementById('resumoValor').innerHTML = `<strong>Valor:</strong> R$ ${valorSobrancelhaSelecionada}`; // Pode mudar o valor se quiser
+    const modalResumo = document.getElementById('modalResumoSobrancelha');
+    if (!modalResumo) return console.error("Modal resumo não encontrado!");
 
-    // Exibe o modal
-    document.getElementById('resumoModal').style.display = 'block';
+    document.getElementById('resumoServicoSobrancelha').innerHTML = `<strong>Serviço:</strong> ${sobrancelhaSelecionada}`;
+    document.getElementById('resumoProfissionalSobrancelha').innerHTML = `<strong>Profissional:</strong> ${profissionalSelecionadoSobrancelha}`;
+    document.getElementById('resumoDataSobrancelha').innerHTML = `<strong>Data:</strong> ${dataInput}`;
+    document.getElementById('resumoHorarioSobrancelha').innerHTML = `<strong>Horário:</strong> ${horarioSelecionadoSobrancelha}`;
+    document.getElementById('resumoValorSobrancelha').innerHTML = `<strong>Valor:</strong> R$ ${valorSobrancelhaSelecionada}`;
+
+    modalResumo.style.display = 'block';
 }
 
-function confirmaAgendamento() {
-    // Fecha o modal de resumo
-    fecharModalCortes();
-
-    // Abre o modal de sucesso
-    document.getElementById("sucessoModalCortes").style.display = "block";
-    
-    confirmaSombrancelhaBackend(openContactModal);
-    
+// Fechar modal de resumo
+function fecharResumoSobrancelha() {
+    const modalResumo = document.getElementById('modalResumoSobrancelha');
+    if (modalResumo) modalResumo.style.display = 'none';
 }
 
-// Função para fechar o modal de contato
-function fecharModal() {
-    document.getElementById("resumoModal").style.display = "none";
+// Fechar modal de sucesso
+function fecharSucessoSobrancelha() {
+    const modalSucesso = document.getElementById('sucessoModalSobrancelha');
+    if (modalSucesso) modalSucesso.style.display = 'none';
 }
 
-// // Função para pagar com Pix            
-// function confirmaAgendamento() {
-//     alert("Agendamento realizado com sucesso!");
-//     fecharModal(); // Fecha o modal após o pagamento
-// }
+// Confirmar agendamento
+function confirmaAgendamentoSobrancelha() {
+    const dataInput = document.getElementById('dataSobrancelha').value.trim();
 
-// ------------------------------------------------------------------------------------
-function confirmaSombrancelhaBackend(callback) {
-    const data = document.getElementById("dataSobrancelha").value.trim();
+    if (!dataInput || !horarioSelecionadoSobrancelha) {
+        alert('Preencha todos os campos antes de confirmar.');
+        return;
+    }
 
-    // Dados que você quer enviar
+    confirmaSobrancelhaBackend();
+}
+
+// Envia os dados para o backend
+function confirmaSobrancelhaBackend() {
+    const dataInput = document.getElementById('dataSobrancelha').value.trim();
+
     const dados = {
-        data: data,
-        horario: horarioSelecionadoSobrancelha,
+        tipoServico: sobrancelhaSelecionada,
         profissional: profissionalSelecionadoSobrancelha,
-        servico: sobrancelhaSelecionada,
+        data: dataInput,
+        horario: horarioSelecionadoSobrancelha,
         valor: valorSobrancelhaSelecionada
     };
 
-    // Envia os dados para o backend
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
     })
     .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            callback(); // Chama a função de callback se o agendamento for bem-sucedido
+    .then(resultado => {
+        console.log("Resposta do servidor:", resultado);
+        if (resultado.status === "success") {
+            fecharResumoSobrancelha();
+            const modalSucesso = document.getElementById("sucessoModalSobrancelha");
+            if (modalSucesso) modalSucesso.style.display = "block";
         } else {
-            alert("Erro ao agendar: " + data.message);
+            alert("Erro ao agendar: " + (resultado.mensagem || "Sem mensagem do servidor"));
         }
     })
     .catch(error => {
-        console.error("Erro:", error);
+        console.error("Erro ao confirmar agendamento:", error);
         alert("Ocorreu um erro ao tentar agendar.");
     });
 }

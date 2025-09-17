@@ -59,20 +59,18 @@ function fecharModalCortes() {
     document.getElementById("modalResumoCortes").style.display = "none";
 }
 
-function confirmaAgendamentoCortes(callback) {
+function confirmaCortesBackend() {
     const data = document.getElementById("dataCortes").value.trim();
 
-    // Dados que você quer enviar
     const dados = {
         data: data,
         horario: horarioSelecionadoCortes,
         profissional: profissionalSelecionadoCortes,
-        servico: corteSelecionadoCortes,
+        tipoServico: corteSelecionadoCortes,
         valor: valorCortesSelecionada
     };
 
-    // Enviar os dados para o backend
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -80,11 +78,12 @@ function confirmaAgendamentoCortes(callback) {
         body: JSON.stringify(dados)
     })
     .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            confirmaAgendamentoCortes();
+    .then(resultado => {
+        if (resultado.status === "success") {
+            fecharModalCortes();
+            document.getElementById("sucessoModalCortes").style.display = "block";
         } else {
-            alert("Erro ao agendar. Tente novamente.");
+            alert(resultado.mensagem);
         }
     })
     .catch(error => console.error("Erro:", error));

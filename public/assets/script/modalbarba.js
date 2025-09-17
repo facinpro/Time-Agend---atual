@@ -74,7 +74,7 @@ function confirmaBarbaBackend(callback) {
         valor: valorBarbaSelecionada
     };
 
-    fetch("salvar_agendamento.php", {
+    fetch("assets/script/salvar_agendamento.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
