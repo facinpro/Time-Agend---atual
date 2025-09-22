@@ -266,7 +266,7 @@
 			</div>
             
 			<!-- Meu site aqui -->
-			<div id="meu-site-content" class="content-section" style="display: none;">
+			<!-- <div id="meu-site-content" class="content-section" style="display: none;">
 				<h1>Meu Site</h1>
 				<p class="info">Aqui estão as informações sobre o seu site.</p>
 				
@@ -290,7 +290,35 @@
                     <input type="text" value="123 Anywhere St., Any City"/>
                 </div>
             </div>
-            <button class="save-button">Salvar</button>
+            <button class="save-button">Salvar</button> -->
+			<div id="meu-site-content" class="content-section" style="display: none;">
+				<h1>Meu Site</h1>
+				<p class="info">Aqui estão as informações sobre o seu site.</p>
+				
+				<form method="POST" action="<?= BASE_URL ?>adm/services/localiza.php">
+					<div class="meios">Meios de contato e endereços:</div>
+					<div class="contact-info">
+						<div>
+							<label>Telefone</label>
+							<input type="text" name="telefone"  value=""/>
+						</div>
+						<div>
+							<label>E-Mail</label>
+							<input type="text" name="email" value=""/>
+						</div>
+						<div>
+							<label>Website</label>
+							<input type="text" name="site" value=""/>
+						</div>
+						<div>
+							<label>Endereço</label>
+							<input type="text" name="local" value=""/>
+						</div>
+					</div>
+					<button type="submit" class="save-button">Salvar</button>
+				</form>
+			</div>
+
 
             <div class="services-prices">
                 <h2>Serviços & preços:</h2>

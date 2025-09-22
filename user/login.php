@@ -1,5 +1,10 @@
 <?php
 include_once('../config/url.php');
+include_once('../adm/services/servicos.php');
+
+$dadosBarbearia = new Empresa($con);
+$dados = $dadosBarbearia->mostrarDadosBarbearia();
+
 
 ?>
 <!DOCTYPE html>
@@ -79,7 +84,7 @@ include_once('../config/url.php');
                     <div class="info-item">
                         <div class="icon-1"><i class="bi bi-telephone"></i></div>
                         <p class="tel1" >Telefone</p>
-                        <p class="tel2" >+123-456-7890</p>
+                        <p class="tel2" ><?= htmlspecialchars($dados[0]['telefone'] ?? 'Não informado')?></p>
                     </div>
                 </div>
 
@@ -88,14 +93,14 @@ include_once('../config/url.php');
                 </div>
                     <div class="icon-2"><i class="bi bi-envelope"></i></div>
                     <p class="email1" >E-Mail</p>
-                    <p class="email2" >hello@reallygreatsite.com</p>
+                    <p class="email2" ><?= htmlspecialchars($dados[0]['email'] ?? 'Não informado')?></p>
                 </div>
 
                 <div class="item-3">
                     <div class="info-item">
                         <div class="icon-3"><i class="bi bi-globe2"></i></div>
                         <p class="web1">Website</p>
-                        <p class="web2" >www.reallygreatsite.com</p>
+                        <p class="web2" ><?= htmlspecialchars($dados[0]['site'] ?? 'Não informado')?></p>
                     </div>
                 </div>
 
@@ -103,7 +108,7 @@ include_once('../config/url.php');
                     <div class="info-item">
                         <div class="icon-4"><i class="bi bi-house-door"></i></div>
                         <p class="end1">Endereço</p>
-                        <p class="end2">123 Anywhere St., Any City</p>
+                        <p class="end2"><?= htmlspecialchars($dados[0]['local'] ?? 'Não informado')?></p>
                     </div>
                 
            

@@ -1,8 +1,9 @@
 <?php  
 
   include_once('../config/url.php');
-  include_once '../models/agenda/perfil.php';
-  setlocale(LC_TIME, 'pt_BR.UTF-8'); 
+  require_once '../models/agenda/perfil.php';
+  setlocale(LC_TIME, 'pt_BR.UTF-8');
+  
 ?>
 
 
@@ -43,7 +44,7 @@
 
             <?php foreach ($agendamentos as $agendamento): 
                 $servico = nomeServico($agendamento['idservico']);
-                $barbeiro = nomeBarbeiro($agendamento['idbarbeiro']); // pega o nome do barbeiro
+                $barbeiro = nomeBarbeiro($agendamento['idbarbeiro']); 
                 
                 $dataHora = new DateTime($agendamento['data']);
                 $dataFormatada = $dataHora->format('d/m');
@@ -60,7 +61,7 @@
                     <span class="price">R$ <?= number_format($servico['preco'] ?? 0, 2, ',', '.') ?></span>
                 </p>
                 <h2>LOCALIZAÇÃO</h2>
-                <p>123 Anywhere<br>St., Any City, ST 12345</p>
+                <p><?= htmlspecialchars($dados[0]['local'] ?? 'Não informado')?><br>St., Any City, ST 12345</p>
                 <button class="cancel-button">CANCELAR</button>
                 
             </div>
@@ -69,6 +70,7 @@
             <?php endforeach; ?>
 
         <?php endif; ?>
+
 
 
     

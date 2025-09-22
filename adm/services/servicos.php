@@ -136,3 +136,38 @@ class Barbeiro{
 
 }
 
+class Empresa{
+    private $con;
+
+    public function __construct($con){
+        $this->con = $con;
+    }
+
+    public function getEmpresa(){
+        $sql = "SELECT * FROM barbearia where id = 1";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    }
+
+    public function setEmpresa($local,$telefone,$email,$site){
+        $sql = "UPDATE barbearia SET local = ?, telefone = ?, email = ?, site = ? WHERE id = 1";
+        $stmt = $this->con->prepare($sql);
+        if(!$stmt){
+            die("Erro ao preparar: " . $this->con->error);
+        }
+        $stmt->bind_param("ssss", $local, $telefone, $email, $site);
+        return $stmt->execute();
+        
+    }
+
+    public function mostrarDadosBarbearia(){
+        global $con;
+        $servico = new Empresa($con);
+        $dados = $servico->getEmpresa();
+        return $dados;
+    }
+}
+
