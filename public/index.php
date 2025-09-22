@@ -39,7 +39,7 @@
                     <a href="#contact" class="nav-link font-medium hover:text-accent transition-colors">Contato</a>
                 </div>
                 
-                <a href="<?= BASE_URL?>/user/login.php" class="btn-primary px-6 py-2.5 rounded-lg inline-block text-center">
+                <a href="<?= BASE_URL?>/public/agendamento.php" class="btn-primary px-6 py-2.5 rounded-lg inline-block text-center">
                   Agendar
                 </a>
             </div>

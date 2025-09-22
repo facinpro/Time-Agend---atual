@@ -49,15 +49,15 @@ foreach ($agendamentos as $agendamento) {
     $dataFormatada = $dataHora->format('d/m/Y');
     $horaFormatada = (new DateTime($agendamento['horario']))->format('H:i');
 
-    if ($servico) {
-        echo "Data: " . $dataFormatada . 
-             " - Hora: " . $horaFormatada . 
-             " - Serviço: " . $servico['nome_servico'] . 
-             " - Barbeiro: " . $barbeiro .
-             " - Preço: R$" . number_format($servico['preco'], 2, ',', '.') . "<br>";
-    } else {
-        echo "Data: " . $dataFormatada . 
-             " - Hora: " . $horaFormatada . 
-             " - Serviço não encontrado<br>";
-    }
+    // if ($servico) {
+    //     echo "Data: " . $dataFormatada . 
+    //          " - Hora: " . $horaFormatada . 
+    //          " - Serviço: " . $servico['nome_servico'] . 
+    //          " - Barbeiro: " . $barbeiro .
+    //          " - Preço: R$" . number_format($servico['preco'], 2, ',', '.') . "<br>";
+    // } else {
+    //     echo "Data: " . $dataFormatada . 
+    //          " - Hora: " . $horaFormatada . 
+    //          " - Serviço não encontrado<br>";
+    // }
 }
