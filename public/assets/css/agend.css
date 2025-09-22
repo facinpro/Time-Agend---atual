@@ -38,7 +38,7 @@ body {
     cursor: pointer;
 }
 .service-item.selected {
-    background-color: #a4e639;
+    background-color: #D4AF37;
     color: #000;
 }
 select, button {
@@ -78,7 +78,7 @@ select, button {
     cursor: pointer;
 }
 .calendar .selected {
-    background-color: #a4e639;
+    background-color: #D4AF37;
 }
 .disabled {
     background-color: #555;

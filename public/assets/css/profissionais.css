@@ -23,7 +23,7 @@
  
 .profissional-card img:hover {
     
-    box-shadow: 0 0 10px #b0c43a;
+    box-shadow: 0 0 10px #D4AF37;
 }
 
 .profissional-card img {
@@ -35,7 +35,7 @@
     border-radius: 10px;
     
     transition: transform 0.3s, box-shadow 0.3s;
-    border: 2px solid #b0c43a;
+    border: 2px solid #D4AF37;
 }
 
 
@@ -68,7 +68,7 @@
     border: none;
     border-radius: 8px; 
     width: 125px;
-    background: linear-gradient(to bottom, #afc43a00, #b0c43a);
+    background: linear-gradient(to bottom, #afc43a00, #D4AF37);
 
     padding: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -79,3 +79,4 @@
     z-index: 1;
     
 }
+

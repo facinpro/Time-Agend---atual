@@ -28,10 +28,10 @@
     cursor: pointer;
 }
 /* Menu */
-.menu-principal {
+/* .menu-principal {
     
     flex-direction: column; /* Organiza itens em coluna no modo responsivo */
-}
+/* } */ 
 
 .menu-principal.active {
     display: flex; /* Exibe o menu quando 'active' está presente */
@@ -71,7 +71,7 @@
 .menu-toggle {
     display: block; /* Exibe o botão de menu em telas menores */
     color: #fff;
-    overflow: hidden;
+   
 }
 
 .menu-principal {
@@ -98,7 +98,7 @@ margin-bottom: 20px;
 transition: 0.5s;
 }
 
-header {
+/* header {
    
     padding: 15px 80px;
     background-color: #000;
@@ -106,7 +106,7 @@ header {
     width: 87%;
     position: relative;
     left: 0px;
-}
+} */
 
 }
 
@@ -312,12 +312,7 @@ header {
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       }
   
-      label {
-          display: block;
-          margin-bottom: 5px;
-          font-weight: bold;
-          color: #333; /* Cor do texto do rótulo */
-      }
+      
   
       .email,
       textarea {
@@ -335,19 +330,32 @@ header {
           outline: none; /* Remove o contorno padrão */
       }
   
-      button[type="submit"] {
+      /* button[type="submit"] {
    background-color: #b0c43a; /* Cor de fundo do botão */
-          color: white; /* Cor do texto do botão */
-          padding: 10px 15px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-          transition: background-color 0.3s;
-      }
+          /* color: white; /* Cor do texto do botão */
+          /* padding: 10px 15px; */
+          /* border: none; */
+          /* border-radius: 5px; */
+          /* cursor: pointer; */
+          /* font-size: 16px; */
+          /* transition: background-color 0.3s; */
+          /* margin-left: 100px; */
+      /* } */ 
+       .button-logout {
+        background-color: #000;
+        color: #fff;
+        padding: 10px 40px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+       position: absolute;
+       top: 660px;
+       margin-left: 350px;
+    }
   
       button[type="submit"]:hover {
-          background-color: #afc43ada; /* Cor do botão ao passar o mouse */
+          background-color: #000000d1; /* Cor do botão ao passar o mouse */
       }
   
       .success-message {

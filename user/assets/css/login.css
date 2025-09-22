@@ -334,11 +334,35 @@ button:hover {
 
 /* Media Queries */
 @media (max-width: 768px) {
+<<<<<<< HEAD
     .container {
         
         position: absolute;
         left: 80px;
         top: 200px;
+=======
+    body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../../../img/Captura\ de\ tela\ 2024-10-12\ 153126.png);
+    background-repeat: no-repeat;
+    background-size: cover; /* cobre toda a tela */
+    background-position: center;
+    background-attachment: fixed; /* opcional: mantém fixa ao rolar */
+}
+ main::before {
+        top: 0; /* ajusta o topo no mobile */
+        bottom: 0; 
+       height: 106%;
+       width: 106%;
+    }
+    .container {
+        
+        position: relative;
+        left: 10px;
+        top: 200px;
+        margin: 0 auto;
+>>>>>>> 97f7664fd35f45bea8fabad40c387e4cac7c0186
     
         
 
@@ -433,7 +457,16 @@ top: -20px;
     .menu ul {
         flex-direction: column;
         position: relative;
+<<<<<<< HEAD
         left: -17px;
+=======
+        left: 2%;
+       
+    }
+    li{
+        padding: 20px;
+        
+>>>>>>> 97f7664fd35f45bea8fabad40c387e4cac7c0186
     }
 
     

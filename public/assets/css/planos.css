@@ -44,7 +44,7 @@
     }
     nav a:hover, .selected {
         color: white;
-        background-color: #b0c43a;
+        background-color: #D4AF37;
         border-radius: 20px;
         padding: 2px 15px;
         
@@ -58,7 +58,7 @@
     }
     .planos-assinatura h3 {
       font-size: 32px;
-      color: #b0c43a;
+      color: #D4AF37;
       margin-bottom: 30px;
     }
     .container-planos {
@@ -83,7 +83,7 @@
     }
     .preco {
       font-size: 24px;
-      color: #b0c43a;
+      color: #D4AF37;
       margin: 10px 0 50px;
     }
     .preco span {
@@ -100,7 +100,7 @@
       margin-bottom: 8px;
     }
     .plano button {
-      background-color: #b0c43a;
+      background-color: #D4AF37;
       color: #000;
       border: none;
       padding: 10px 20px;
@@ -110,7 +110,7 @@
       transition: background-color 0.3s;
     }
     .plano button:hover {
-      background-color: #9fb134;
+      background-color: #D4AF37;
     }
     @media (max-width: 768px) {
       nav {
