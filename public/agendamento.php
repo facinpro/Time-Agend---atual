@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento1.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/agendamento2.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/profissionais.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo2.css"> 
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/contact.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/responsivo-modais.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/assets/css/resumo.css">
@@ -61,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['sendEmail'])) {
             <a href="<?= BASE_URL ?>/public/agendamento.php" class="selected">Agenda</a>
             <a href="<?= BASE_URL ?>/public/planos.php">Planos</a>
             <a href="<?= BASE_URL ?>/public/perfil.php">Perfil</a> <!-- Classe "selected" aplicada ao Perfil -->
-            <a href="#" onclick="openContact()">Contato</a>
+            <a href="#" onclick="openContact()" id="btnFaleConosco">Contato</a>
         </nav>
          <style>
            .linha-servico-titulo {
@@ -108,42 +107,179 @@ margin: 10px auto;
 
         </style>
     </header>
-    <div class="modal" id="contactModal">
-    <div class="modal-content-1">
-
-    <?php if (!empty($successMessage) || !empty($errorMessage)): ?>
-    <div id="mensagemModal" class="custom-modal" style="display: block;">
-        <div class="custom-modal-content">
-            <p>
-                <?php 
-                    echo !empty($successMessage) 
-                        ? htmlspecialchars($successMessage) 
-                        : htmlspecialchars($errorMessage); 
-                ?>
-            </p>
-            <button onclick="fecharModal()">OK</button>
-        </div>
-    </div>
-    <?php endif; ?>
-
-
-        <span class="close" onclick="closeContactModal()">&times;</span>
     
-        <div id="contato" class="contato-container">
-      
-            <form class="form-email" method="POST">
-            <h3 class="fale-conosco">Fale <span class="conosco">Conosco</span></h3>
-                <label for="user_name">Nome:</label>
-                <input type="text" name="user_name" id="user_name" required>
-                <label for="user_email">E-mail:</label>
-                <input type="email" name="user_email" id="user_email" required>
-                <label for="mensagem">Mensagem:</label>
-                <textarea name="mensagem" id="mensagem" required></textarea>
-                <button type="submit" name="sendEmail" data-button>Enviar</button>
-            </form>
-        </div>
-    </div>
+<style>
+
+
+
+.container-contato {
+  
+  border-radius: 12px;
+  
+  width: 100%;
+  max-width: 450px;
+}
+
+.container-contato h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.container-contato label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.container-contato input,
+.container-contato textarea {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.container-contato input:focus,
+.container-contato textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.container-contato button {
+  width: 100%;
+  padding: 14px;
+  background: #a1b300;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.container-contato button:hover {
+  background: #8a9900;
+}
+
+/* Modal */
+.modal-contato {
+  display: none; 
+  position: fixed; 
+  z-index: 999; 
+  left: 0; 
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background: rgba(0,0,0,0.6);
+  justify-content: center; 
+  align-items: center;
+}
+
+.modal-content-contato {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+#closeModal-contato {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
+}
+
+</style>
+
+<!-- Modal com formulário dentro -->
+<div id="modal-contato" class="modal-contato">
+  <div class="modal-content-contato">
+    <span id="closeModal-contato">×</span>
+
+    <h2>Fale Conosco</h2>
+    <form id="contactForm-contato" class="container-contato">
+      <label for="nome-contato">Nome:</label>
+      <input type="text" id="nome-contato" name="nome" placeholder="Seu nome" required>
+
+      <label for="email-contato">E-mail:</label>
+      <input type="email" id="email-contato" name="email" placeholder="seuemail@exemplo.com" required>
+
+      <label for="mensagem-contato">Mensagem:</label>
+      <textarea id="mensagem-contato" name="mensagem" rows="5" placeholder="Digite sua mensagem..." required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <!-- mensagem de retorno -->
+    <p id="modalMsg-contato"></p>
+  </div>
 </div>
+
+<script>
+const formContato = document.getElementById('contactForm-contato');
+const modalContato = document.getElementById('modal-contato');
+const modalMsgContato = document.getElementById('modalMsg-contato');
+const closeModalContato = document.getElementById('closeModal-contato');
+
+// Função para abrir o modal
+function abrirContato() {
+  modalMsgContato.textContent = "";
+  modalContato.style.display = "flex";
+}
+
+// Evento de envio do formulário
+formContato.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('nome-contato').value.trim();
+  const email = document.getElementById('email-contato').value.trim();
+  const mensagem = document.getElementById('mensagem-contato').value.trim();
+
+  if (nome === "" || email === "" || mensagem === "") {
+    modalMsgContato.textContent = "⚠️ Preencha todos os campos!";
+    return;
+  }
+
+  try {
+    let response = await fetch("api.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, email, mensagem })
+    });
+
+    let result = await response.json();
+    modalMsgContato.textContent = result.success 
+      ? "✅ Mensagem enviada com sucesso!" 
+      : "❌ Erro ao enviar a mensagem.";
+  } catch (error) {
+    modalMsgContato.textContent = "🚨 Falha na conexão com o servidor.";
+  }
+
+  formContato.reset();
+});
+
+// Fecha o modal ao clicar no X
+closeModalContato.addEventListener('click', () => modalContato.style.display = "none");
+
+// Fecha o modal ao clicar fora dele
+window.addEventListener('click', (e) => {
+  if (e.target === modalContato) modalContato.style.display = "none";
+});
+
+// Captura clique do menu (o link precisa ter id="btnFaleConosco")
+document.getElementById('btnFaleConosco').addEventListener('click', abrirContato);
+</script>
+
+
+
+
+        
 
 
 

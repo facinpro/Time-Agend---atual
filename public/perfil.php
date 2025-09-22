@@ -101,13 +101,38 @@ if ($usuario) {
     
     <div class="historico" onclick="window.location.href='<?= BASE_URL?>/public/historico.php' ">Histórico e movimentações</div>
     <class class="container">
-        <div class="edit-icon">
-            <i class="fas fa-edit"></i>
-        </div>
+       
         <div>
-            <form action="<?= BASE_URL ?>models/auth/upload_foto.php" method="POST" enctype="multipart/form-data">
-                <input type="file" name="imagem" required>
-                <button type="submit">Salvar</button>
+          <form id="form-upload" action="<?= BASE_URL ?>models/auth/upload_foto.php" method="POST" enctype="multipart/form-data">
+    <input type="file" id="upload-imagem" name="imagem" required hidden>
+
+    <!-- label com ícone -->
+    <label for="upload-imagem" class="upload-label">
+        <img src="<?= BASE_URL ?>/img/icons8-camera-48.png" alt="Selecionar foto" width="40" height="40">
+    </label>
+
+    <!-- botão de salvar removido -->
+</form>
+
+                <stYle>
+                  
+                    .upload-label {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 480px;
+    position: relative; /* em vez do z-index */
+   background-color: #9ed74dff ;
+  padding: 5px;
+  height: 40px;
+   border-radius: 50%;
+}
+
+                    .upload-label:hover {
+    background-color: #aae657e6;
+    
+                    }
+</stYle>
             </form>
         </div>
 
@@ -122,16 +147,43 @@ if ($usuario) {
         </div>
             <button class="button">Salvar</button>
             <form action="<?= BASE_URL ?>models/auth/logout.php" method="POST">
-                <button type="submit" class="button" name="logout">Desvincular</button>
+                <button type="submit" class="button-logout" name="logout">Desvincular</button>
             </form>
-    
+            <style>
+                .button{
+                    margin-right: 150px;
+                }
+            </style>
     
     </class>
     
 </main>
  <script src="<?= BASE_URL?>public/assets/script/menu.js"></script>
  <script src="<?=BASE_URL?>/public/assets/script/contact.js"></script>
- 
+ <script>
+document.getElementById("upload-imagem").addEventListener("change", function() {
+    const arquivo = this.files[0];
+    if (!arquivo) return;
+
+    const formData = new FormData();
+    formData.append("imagem", arquivo);
+
+    fetch("<?= BASE_URL ?>models/auth/upload_foto.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Mensagem de retorno do PHP
+        // Atualiza a página para mostrar a nova foto
+        location.reload();
+    })
+    .catch(error => {
+        console.error("Erro ao enviar imagem:", error);
+    });
+});
+</script>
+
 </body>
 </html>
 
