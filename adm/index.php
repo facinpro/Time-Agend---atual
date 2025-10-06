@@ -239,34 +239,74 @@
   <div class="services-prices">
     <h2>Serviços & Preços</h2>
 
-    <div class="categories">
-      <?php foreach ($servicos as $s): ?>
-      <div class="category">
-        <div class="barber-card">
-          <div class="edit-icon"><i class="fas fa-edit"></i></div>
-          <strong><?= htmlspecialchars($s['nome_servico']); ?></strong><br>
-          Tipo: <?= htmlspecialchars($s['tipo']); ?><br>
-          Preço: R$ <?= number_format($s['preco'], 2, ',', '.'); ?><br>
-          Duração: <?= htmlspecialchars($s['duracao']); ?>
-        </div>
-      </div>
-      <?php endforeach; ?>
+    <!-- Tabela de Serviços -->
+    <table class="services-table">
+        <thead>
+            <tr>
+                <th>Nome do Serviço</th>
+                <th>Categoria (Tipo)</th>
+                <th>Preço</th>
+                <th>Duração</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($servicos as $s): ?>
+            <tr>
+                <td><?= htmlspecialchars($s['nome_servico']); ?></td>
+                <td><?= htmlspecialchars($s['tipo']); ?></td>
+                <td>R$ <?= number_format($s['preco'], 2, ',', '.'); ?></td>
+                <td><?= htmlspecialchars($s['duracao']); ?> min</td>
+                <td><i class="fas fa-edit" style="cursor:pointer;"></i></td>
+            </tr>
+            <?php endforeach; ?>
 
-      <!-- Serviço fictício -->
-      <div class="category">
-        <div class="barber-card">
-          <div class="edit-icon"><i class="fas fa-edit"></i></div>
-          <strong>Corte Masculino Clássico</strong><br>
-          Tipo: Cabelo<br>
-          Preço: R$ 35,00<br>
-          Duração: 30 min
-        </div>
-      </div>
-    </div>
+            <!-- Serviço fictício -->
+            <tr>
+                <td>Corte Masculino Clássico</td>
+                <td>Corte</td>
+                <td>R$ 35,00</td>
+                <td>30 min</td>
+                <td><i class="fas fa-edit" style="cursor:pointer;"> Editar</i></td>
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Botão abrir modal -->
     <button class="add-service-btn" id="openModalBtn">+ Adicionar Serviço</button>
-  </div>
+</div>
+
+<style>
+.services-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.services-table th, .services-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.services-table th {
+    background-color: #4b0082;
+    color: white;
+}
+
+.services-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.services-table tr:hover {
+    background-color: #f1eef9;
+}
+</style>
+
+
+    
 </div>
 
 <!-- Modal para adicionar serviço -->
@@ -407,6 +447,7 @@
   margin: 0 auto 20px;
   font-size: 1rem;
   transition: background 0.3s;
+
 }
 
 .add-service-btn:hover { background-color: #5e12a8; }
@@ -611,7 +652,7 @@ window.addEventListener('click', (e) => { if(e.target === modal) modal.style.dis
       <!-- Exemplo fictício -->
       <div class="professional-card">
         <div class="card-img">
-         <img src="<?= BASE_URL ?>adm/img/adm-barber.png" alt="Foto de João Silva">
+         <img src="<?= BASE_URL ?>adm/img/Captura de tela 2024-12-15 012952.png" alt="Foto de João Silva">
         </div>
         <div class="card-info">
           <strong>João Silva</strong>

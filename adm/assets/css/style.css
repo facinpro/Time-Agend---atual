@@ -816,19 +816,6 @@ body.dark .todo .todo-list li i:hover {
 }
 
 /* Botão Salvar */
-.button-barber {
-    margin-top: 50px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-	position: relative;
-	left: 46%;
-}
 
 .button-barber:hover {
     background-color: #0056b3;
